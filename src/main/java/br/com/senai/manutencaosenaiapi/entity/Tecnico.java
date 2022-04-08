@@ -28,6 +28,6 @@ public class Tecnico {
 	private LocalDate dataDeAdmissao;
 	
 	public boolean isNovo() {
-		return getId() == null || getId() > 0;
+		return getId() == null || getId() == 0;
 	}
 }
