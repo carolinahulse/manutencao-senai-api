@@ -1,5 +1,10 @@
 package br.com.senai.manutencaosenaiapi.service;
+import java.util.ArrayList;
+import java.util.List;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -26,5 +31,19 @@ public class TecnicoService {
 		Tecnico tecnicoAtualizado = tecnicoSalvo;
 		return tecnicoAtualizado;
 		
+	}
+	
+	public List<Tecnico> listarPor(
+			@NotEmpty(message = "O nome para busca não pode ser nulo")
+			@NotBlank(message = "Não pode haver espaços antes do nome")
+			String nome) {
+		return new ArrayList<Tecnico>();
+	}
+	
+	public void removerPor(
+			@NotNull(message = "O id de exclusão não pode ser nulo")
+			@Min(value = 1, message = "O id deve ser maior que 0")
+			Integer id) {
+		//TODO implementar lógica de remoção
 	}
 }
