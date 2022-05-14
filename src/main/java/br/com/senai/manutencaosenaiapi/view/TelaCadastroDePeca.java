@@ -1,18 +1,11 @@
 package br.com.senai.manutencaosenaiapi.view;
-
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import br.com.senai.manutencaosenaiapi.entity.Peca;
 import br.com.senai.manutencaosenaiapi.service.PecaService;
-
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -22,14 +15,21 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextArea;
 
 @Component
-public class TelaCadastroDeTipo extends JFrame {
+public class TelaCadastroDePeca extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField edtId;
 	private JTextField edtDescricao;
-	
+	private JLabel lblEspecificacoes;
+	private JTextArea jtaEspecificacoes;
+
 	@Autowired
 	private PecaService service;
 	private JLabel lblQtde;
@@ -38,61 +38,82 @@ public class TelaCadastroDeTipo extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaCadastroDeTipo() {
-		setTitle("Cadastro de Tipo de Peça");
+	public TelaCadastroDePeca() {
+		setTitle("Cadastro de Peça");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 170);
+		setBounds(100, 100, 450, 362);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		
+
 		JLabel lblId = new JLabel("ID");
-		
+
 		edtId = new JTextField();
 		edtId.setEnabled(false);
 		edtId.setColumns(10);
-		
+
 		JLabel lblDescricao = new JLabel("Descrição");
-		
+
 		edtDescricao = new JTextField();
 		edtDescricao.setColumns(10);
-		
+
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Peca novaPeca = new Peca();
-					novaPeca.setDescricao(edtDescricao.getText());
-					novaPeca.setQtdEmEstoque(Integer.parseInt(edtQtde.getText()));
-					Peca pecaSalva = service.inserir(novaPeca);
-					edtId.setText(pecaSalva.getId().toString());
+					if(edtId.getText() != null && edtId.getText().length() > 0) {
+						Peca pecaSalva = new Peca();
+						pecaSalva.setDescricao(edtDescricao.getText());
+						pecaSalva.setQtdEmEstoque(Integer.parseInt(edtQtde.getText()));
+						pecaSalva.setEspecificacoes(jtaEspecificacoes.getText());
+						pecaSalva.setId(Integer.parseInt(edtId.getText()));
+						service.alterar(pecaSalva);
+						JOptionPane.showMessageDialog(contentPane, "Peça alterada com sucesso!");
+					}
+					else {
+						Peca novaPeca = new Peca();
+						novaPeca.setDescricao(edtDescricao.getText());
+						novaPeca.setQtdEmEstoque(Integer.parseInt(edtQtde.getText()));
+						novaPeca.setEspecificacoes(jtaEspecificacoes.getText());
+						Peca pecaSalva = service.inserir(novaPeca);
+						edtId.setText(pecaSalva.getId().toString());
+						JOptionPane.showMessageDialog(contentPane, "Peça inserida com sucesso!");
+					}
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(contentPane, ex.getMessage());
 				}
 			}
 		});
-		
+
 		lblQtde = new JLabel("Qtde");
-		
+
 		edtQtde = new JTextField();
 		edtQtde.setColumns(10);
+		
+		lblEspecificacoes = new JLabel("Especificações");
+		
+		jtaEspecificacoes = new JTextArea();
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblId)
-						.addComponent(edtId, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE))
-					.addGap(26)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblDescricao)
-						.addComponent(edtDescricao, GroupLayout.PREFERRED_SIZE, 221, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblQtde)
-						.addComponent(edtQtde, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE))
-					.addGap(20))
 				.addComponent(btnSalvar)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(lblEspecificacoes)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblId)
+								.addComponent(edtId, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE))
+							.addGap(26)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblDescricao)
+								.addComponent(edtDescricao, GroupLayout.PREFERRED_SIZE, 221, GroupLayout.PREFERRED_SIZE))
+							.addGap(18)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblQtde)
+								.addComponent(edtQtde, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(jtaEspecificacoes))
+					.addGap(20))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -106,9 +127,19 @@ public class TelaCadastroDeTipo extends JFrame {
 						.addComponent(edtId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(edtDescricao, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(edtQtde, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+					.addGap(18)
+					.addComponent(lblEspecificacoes)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(jtaEspecificacoes, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
 					.addComponent(btnSalvar))
 		);
 		contentPane.setLayout(gl_contentPane);
+	}
+	public void colocarEmEdicao(Peca pecaSalva) {
+		edtId.setText(pecaSalva.getId().toString());
+		edtDescricao.setText(pecaSalva.getDescricao());
+		jtaEspecificacoes.setText(pecaSalva.getEspecificacoes());
+		edtQtde.setText(pecaSalva.getQtdEmEstoque().toString());
 	}
 }
