@@ -7,20 +7,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 @Entity(name = "TipoDePeca")
 @Table(name = "tipoDePeca")
-@ToString
+@Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class TipoDePeca {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Getter @Setter
 	@EqualsAndHashCode.Include
 	private Integer id;
 	

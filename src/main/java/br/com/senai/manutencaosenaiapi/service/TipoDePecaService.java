@@ -26,6 +26,14 @@ public class TipoDePecaService {
 		return tipoDePecaAtualizada;
 	}
 	
+	public TipoDePeca alterar(
+			@Valid
+			@NotNull(message = "O tipo de peça não pode ser nulo")
+			TipoDePeca tipoDePecaSalva) {
+		TipoDePeca tipoDePecaAtualizada = repository.save(tipoDePecaSalva);
+		return tipoDePecaAtualizada;
+	}
+	
 	public void removerPor(
 			@NotNull(message = "O id do tipo da peça para remoção não pode ser nulo")
 			@Min(value = 1, message = "O id do tipo da peça deve ser maior que 0")
