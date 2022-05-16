@@ -5,6 +5,10 @@ import br.com.senai.manutencaosenaiapi.entity.Peca;
 
 public class PecaTableModel extends AbstractTableModel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final int QTD_COLUNAS = 3;
 	private List<Peca> pecas;
 	
