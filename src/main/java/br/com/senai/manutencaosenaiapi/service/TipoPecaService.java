@@ -8,30 +8,30 @@ import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-import br.com.senai.manutencaosenaiapi.entity.TipoDePeca;
-import br.com.senai.manutencaosenaiapi.repository.TiposDePecaRepository;
+import br.com.senai.manutencaosenaiapi.entity.TipoPeca;
+import br.com.senai.manutencaosenaiapi.repository.TiposPecaRepository;
 
 @Service
 @Validated
-public class TipoDePecaService {
+public class TipoPecaService {
 	
 	@Autowired
-	private TiposDePecaRepository repository;
+	private TiposPecaRepository repository;
 	
-	public TipoDePeca inserir(
+	public TipoPeca inserir(
 			@Valid
 			@NotNull(message = "O tipo de peça não pode ser nula")
-			TipoDePeca tipoDePecaSalva) {
-		TipoDePeca tipoDePecaAtualizada = repository.save(tipoDePecaSalva);
-		return tipoDePecaAtualizada;
+			TipoPeca tipoPecaSalva) {
+		TipoPeca tipoPecaAtualizada = repository.save(tipoPecaSalva);
+		return tipoPecaAtualizada;
 	}
 	
-	public TipoDePeca alterar(
+	public TipoPeca alterar(
 			@Valid
 			@NotNull(message = "O tipo de peça não pode ser nulo")
-			TipoDePeca tipoDePecaSalva) {
-		TipoDePeca tipoDePecaAtualizada = repository.save(tipoDePecaSalva);
-		return tipoDePecaAtualizada;
+			TipoPeca tipoPecaSalva) {
+		TipoPeca tipoPecaAtualizada = repository.save(tipoPecaSalva);
+		return tipoPecaAtualizada;
 	}
 	
 	public void removerPor(
@@ -41,7 +41,7 @@ public class TipoDePecaService {
 		this.repository.deleteById(id);
 	}
 	
-	public List<TipoDePeca> listarPor(
+	public List<TipoPeca> listarPor(
 			@NotEmpty(message = "A descrição da busca é obrigatória")
 			@NotBlank(message = "A descrição não pode conter espaço vazio")
 			String descricao) {

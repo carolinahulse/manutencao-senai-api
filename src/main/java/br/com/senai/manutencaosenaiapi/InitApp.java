@@ -6,12 +6,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import br.com.senai.manutencaosenaiapi.view.TelaConsultaDePeca;
+import br.com.senai.manutencaosenaiapi.view.TelaConsultaDeTipoPeca;
+
 @SpringBootApplication
 public class InitApp {
 	
 	@Autowired
-	private TelaConsultaDePeca telaDeConsulta;
+	private TelaConsultaDeTipoPeca telaDeConsulta;
 
 	public static void main(String[] args) {
 		SpringApplicationBuilder builder = new SpringApplicationBuilder(InitApp.class);

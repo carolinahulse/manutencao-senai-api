@@ -4,14 +4,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import br.com.senai.manutencaosenaiapi.entity.TipoDePeca;
+import br.com.senai.manutencaosenaiapi.entity.TipoPeca;
 
 @Repository
-public interface TiposDePecaRepository extends 
-		JpaRepository<TipoDePeca, Integer> {
+public interface TiposPecaRepository extends 
+		JpaRepository<TipoPeca, Integer> {
 	@Query(value = 
 			"SELECT tp "
-			+ "FROM TipoDePeca tp "
+			+ "FROM TipoPeca tp "
 			+ "WHERE Upper(tp.descricao) LIKE Upper(:desc)")
-	List<TipoDePeca> listarPor(@Param("desc") String descricao);
+	List<TipoPeca> listarPor(@Param("desc") String descricao);
 }

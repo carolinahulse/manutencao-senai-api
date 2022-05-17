@@ -1,14 +1,10 @@
 package br.com.senai.manutencaosenaiapi.view;
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
-import br.com.senai.manutencaosenaiapi.entity.TipoDePeca;
-import br.com.senai.manutencaosenaiapi.service.TipoDePecaService;
-
+import br.com.senai.manutencaosenaiapi.entity.TipoPeca;
+import br.com.senai.manutencaosenaiapi.service.TipoPecaService;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -19,7 +15,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class TelaCadastroDeTiposDePeca extends JFrame {
+public class TelaCadastroDeTiposPeca extends JFrame {
 
 	/**
 	 * 
@@ -30,13 +26,13 @@ public class TelaCadastroDeTiposDePeca extends JFrame {
 	private JTextField edtDescricao;
 	
 	@Autowired
-	TipoDePecaService service;
+	TipoPecaService service;
 
 	/**
 	 * Create the frame.
 	 */
-	public TelaCadastroDeTiposDePeca() {
-		setTitle("Cadastro de Tipos de Peça");
+	public TelaCadastroDeTiposPeca() {
+		setTitle("Cadastro de Tipos Peça");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 158);
 		contentPane = new JPanel();
@@ -59,17 +55,17 @@ public class TelaCadastroDeTiposDePeca extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if(edtId.getText() != null && edtId.getText().length() > 0) {
-						TipoDePeca tipoDePecaSalva = new TipoDePeca();
-						tipoDePecaSalva.setDescricao(edtDescricao.getText());
-						tipoDePecaSalva.setId(Integer.parseInt(edtId.getText()));
-						service.alterar(tipoDePecaSalva);
+						TipoPeca tipoPecaSalva = new TipoPeca();
+						tipoPecaSalva.setDescricao(edtDescricao.getText());
+						tipoPecaSalva.setId(Integer.parseInt(edtId.getText()));
+						service.alterar(tipoPecaSalva);
 						JOptionPane.showMessageDialog(contentPane, "Tipo de peça alterada com sucesso!");
 					}
 					else {
-						TipoDePeca novoTipoDePeca = new TipoDePeca();
-						novoTipoDePeca.setDescricao(edtDescricao.getText());
-						TipoDePeca tipoDePecaSalva = service.inserir(novoTipoDePeca);
-						edtId.setText(tipoDePecaSalva.getId().toString());
+						TipoPeca novoTipoPeca = new TipoPeca();
+						novoTipoPeca.setDescricao(edtDescricao.getText());
+						TipoPeca tipoPecaSalva = service.inserir(novoTipoPeca);
+						edtId.setText(tipoPecaSalva.getId().toString());
 						JOptionPane.showMessageDialog(contentPane, "Tipo de peça inserida com sucesso!");
 					}
 				} catch (Exception ex) {
@@ -108,5 +104,9 @@ public class TelaCadastroDeTiposDePeca extends JFrame {
 					.addComponent(btnSalvar))
 		);
 		contentPane.setLayout(gl_contentPane);
+	}
+	public void colocarEmEdicao(TipoPeca tipoPecaSalva) {
+		edtId.setText(tipoPecaSalva.getId().toString());
+		edtDescricao.setText(tipoPecaSalva.getDescricao());
 	}
 }

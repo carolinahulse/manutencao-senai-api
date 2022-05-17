@@ -10,11 +10,11 @@ import javax.validation.constraints.Size;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Entity(name = "TipoDePeca")
-@Table(name = "tipoDePeca")
+@Entity(name = "TipoPeca")
+@Table(name = "tipoPeca")
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class TipoDePeca {
+public class TipoPeca {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
