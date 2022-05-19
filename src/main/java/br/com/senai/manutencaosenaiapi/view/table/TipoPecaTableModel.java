@@ -10,15 +10,15 @@ public class TipoPecaTableModel extends AbstractTableModel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private final int QTD_COLUNAS = 2;
-	private List<TipoPeca> tipoPecas;
+	private List<TipoPeca> tipoPeca;
 	
 	public TipoPecaTableModel(List<TipoPeca> tipoPecas) {
-		this.tipoPecas = tipoPecas;
+		this.tipoPeca = tipoPecas;
 	}
 	
 	@Override
 	public int getRowCount() {
-		return tipoPecas.size();
+		return tipoPeca.size();
 	}
 
 	@Override
@@ -38,20 +38,20 @@ public class TipoPecaTableModel extends AbstractTableModel {
 	}
 	
 	public TipoPeca getPor(int rowIndex) {
-		return tipoPecas.get(rowIndex);
+		return tipoPeca.get(rowIndex);
 	}
 	
 	public void removerPor(int rowIndex) {
-		tipoPecas.remove(rowIndex);
+		tipoPeca.remove(rowIndex);
 	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		if(columnIndex == 0) {
-			return tipoPecas.get(rowIndex).getId();
+			return tipoPeca.get(rowIndex).getId();
 		}
 		else if(columnIndex == 1) {
-			return tipoPecas.get(rowIndex).getDescricao();
+			return tipoPeca.get(rowIndex).getDescricao();
 		}
 		throw new IllegalArgumentException("Índice inválido");
 	}

@@ -3,6 +3,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import br.com.senai.manutencaosenaiapi.entity.TipoPeca;
 import br.com.senai.manutencaosenaiapi.service.TipoPecaService;
 import javax.swing.GroupLayout;
@@ -15,6 +16,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@Component
 public class TelaCadastroDeTiposPeca extends JFrame {
 
 	/**
